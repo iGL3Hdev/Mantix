@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Landing copy lives in src/data; sections in src/sections; reusable UI in src/components — keeps content separate from presentation.
+- Future feature modules go in src/modules/<name>/ — isolates domain code as the app grows.
