@@ -27,3 +27,14 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## Mantix — landing page
+
+Arranque: `bun install` y `bun run dev`.
+
+Convención de carpetas (`src/`):
+- `components/` — piezas reutilizables (cabecera, botones, tarjetas, pie, logotipo).
+- `sections/` — secciones de la landing.
+- `data/` — textos y contenidos, separados de la presentación.
+- `styles.css` — tokens de diseño (colores, tipografías).
+- Módulos futuros (p. ej. equipos, órdenes) irán en `src/modules/<nombre>/` con sus propias rutas en `src/routes/`.
