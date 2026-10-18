@@ -25,16 +25,16 @@ La aplicación queda disponible en http://localhost:3000.
 
 ## Scripts
 
-| Comando              | Descripción                                |
-| -------------------- | ------------------------------------------ |
-| `npm run dev`        | Servidor de desarrollo                     |
-| `npm run build`      | Build de producción                        |
-| `npm run build:dev`  | Build en modo desarrollo                   |
-| `npm run preview`    | Previsualiza el build                      |
-| `npm run lint`       | Análisis con ESLint                        |
-| `npm run format`     | Formatea el código con Prettier            |
-| `npm test`           | Ejecuta los tests (Vitest)                 |
-| `npm run test:watch` | Tests en modo observación                  |
+| Comando              | Descripción                     |
+| -------------------- | ------------------------------- |
+| `npm run dev`        | Servidor de desarrollo          |
+| `npm run build`      | Build de producción             |
+| `npm run build:dev`  | Build en modo desarrollo        |
+| `npm run preview`    | Previsualiza el build           |
+| `npm run lint`       | Análisis con ESLint             |
+| `npm run format`     | Formatea el código con Prettier |
+| `npm test`           | Ejecuta los tests (Vitest)      |
+| `npm run test:watch` | Tests en modo observación       |
 
 ## Estructura
 
@@ -43,6 +43,13 @@ La aplicación queda disponible en http://localhost:3000.
 - `src/components`: componentes de UI reutilizables
 - `src/routes`: rutas (TanStack Router)
 - `src/modules/<nombre>/`: módulos de funcionalidad futuros
+
+## Documentación
+
+- [Guía del proyecto](docs/Guía.md)
+- [Plan de trabajo](docs/plan-de-trabajo.md)
+- [Decisiones](docs/decisiones.md)
+- [Frontend](docs/frontend.md) y [estilos](docs/estilos.md)
 
 ## Solución de problemas
 

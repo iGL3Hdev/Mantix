@@ -13,7 +13,10 @@ export function Footer() {
           <ul className="flex flex-col gap-2 text-sm">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a href={item.href} className="text-primary-foreground/80 hover:text-primary-foreground hover:underline focus-visible:underline focus-visible:outline-none">
+                <a
+                  href={item.href}
+                  className="text-primary-foreground/80 hover:text-primary-foreground hover:underline focus-visible:underline focus-visible:outline-none"
+                >
                   {item.label}
                 </a>
               </li>

@@ -85,6 +85,8 @@
   --accent-foreground: oklch(0.2 0.03 220);
   --accent-strong: oklch(0.5 0.1 180);
   --warning: oklch(0.78 0.14 75);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0.005 230);
   --border: oklch(0.9 0.01 230);
   --input: oklch(0.9 0.01 230);
   --ring: oklch(0.5 0.1 180);
@@ -151,9 +153,13 @@
 
 @utility bg-grid {
   background-color: var(--background);
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: -1px -1px;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}

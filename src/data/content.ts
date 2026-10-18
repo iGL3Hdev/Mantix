@@ -30,19 +30,50 @@ export const hero = {
 };
 
 export const features: InfoItem[] = [
-  { icon: Cog, title: "Gestión de equipos", description: "Centraliza la información de máquinas e instalaciones." },
-  { icon: AlertTriangle, title: "Incidencias", description: "Registra problemas y facilita su seguimiento." },
-  { icon: ClipboardList, title: "Órdenes de trabajo", description: "Organiza las tareas de mantenimiento y su estado." },
-  { icon: History, title: "Historial y trazabilidad", description: "Consulta las actuaciones realizadas y su evolución." },
+  {
+    icon: Cog,
+    title: "Gestión de equipos",
+    description: "Centraliza la información de máquinas e instalaciones.",
+  },
+  {
+    icon: AlertTriangle,
+    title: "Incidencias",
+    description: "Registra problemas y facilita su seguimiento.",
+  },
+  {
+    icon: ClipboardList,
+    title: "Órdenes de trabajo",
+    description: "Organiza las tareas de mantenimiento y su estado.",
+  },
+  {
+    icon: History,
+    title: "Historial y trazabilidad",
+    description: "Consulta las actuaciones realizadas y su evolución.",
+  },
 ];
 
 export const value = {
   title: "Menos improvisación. Más control.",
   text: "Cuando la información de mantenimiento está estructurada, planificar, hacer seguimiento y decidir deja de depender de la memoria o de hojas dispersas.",
   items: [
-    { icon: Database, title: "Información centralizada", description: "Equipos, incidencias y órdenes en un mismo sistema, con un único punto de consulta." },
-    { icon: Activity, title: "Seguimiento de actuaciones", description: "Cada intervención queda registrada, con su responsable, su estado y su historial." },
-    { icon: Eye, title: "Visibilidad del estado", description: "Una visión clara de qué está pendiente, qué está en curso y qué se ha resuelto." },
+    {
+      icon: Database,
+      title: "Información centralizada",
+      description:
+        "Equipos, incidencias y órdenes en un mismo sistema, con un único punto de consulta.",
+    },
+    {
+      icon: Activity,
+      title: "Seguimiento de actuaciones",
+      description:
+        "Cada intervención queda registrada, con su responsable, su estado y su historial.",
+    },
+    {
+      icon: Eye,
+      title: "Visibilidad del estado",
+      description:
+        "Una visión clara de qué está pendiente, qué está en curso y qué se ha resuelto.",
+    },
   ] satisfies InfoItem[],
 };
 
@@ -53,6 +84,7 @@ export const closing = {
 };
 
 export const footer = {
-  description: "Aplicación web para la gestión del mantenimiento industrial: equipos, incidencias y órdenes de trabajo.",
+  description:
+    "Aplicación web para la gestión del mantenimiento industrial: equipos, incidencias y órdenes de trabajo.",
   status: "Proyecto en desarrollo",
 };

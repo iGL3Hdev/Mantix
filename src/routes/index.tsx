@@ -8,9 +8,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Mantix — Gestión del mantenimiento industrial" },
-      { name: "description", content: "Organiza equipos, incidencias y órdenes de trabajo desde un único lugar con Mantix." },
+      {
+        name: "description",
+        content:
+          "Organiza equipos, incidencias y órdenes de trabajo desde un único lugar con Mantix.",
+      },
       { property: "og:title", content: "Mantix — Gestión del mantenimiento industrial" },
-      { property: "og:description", content: "Equipos, incidencias y órdenes de trabajo, centralizados y trazables." },
+      {
+        property: "og:description",
+        content: "Equipos, incidencias y órdenes de trabajo, centralizados y trazables.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

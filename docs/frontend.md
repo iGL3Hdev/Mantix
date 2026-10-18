@@ -2,24 +2,24 @@
 
 ## Stack
 
-| Área          | Tecnología                                              |
-| ------------- | ------------------------------------------------------- |
-| Framework     | React 19 + TanStack Start (SSR) + TanStack Router       |
-| Build         | Vite 8, servidor con Nitro                              |
-| Estilos       | Tailwind CSS 4, shadcn/ui (Radix), `tw-animate-css`     |
-| Datos         | TanStack Query                                          |
-| Formularios   | React Hook Form + Zod                                   |
-| Iconos        | lucide-react                                            |
-| Notificaciones| sonner                                                  |
-| Gráficos      | recharts                                                |
-| Tests         | Vitest + Testing Library + jsdom                        |
-| Calidad       | ESLint, Prettier, TypeScript estricto                   |
+| Área           | Tecnología                                          |
+| -------------- | --------------------------------------------------- |
+| Framework      | React 19 + TanStack Start (SSR) + TanStack Router   |
+| Build          | Vite 8, servidor con Nitro                          |
+| Estilos        | Tailwind CSS 4, shadcn/ui (Radix), `tw-animate-css` |
+| Datos          | TanStack Query                                      |
+| Formularios    | React Hook Form + Zod                               |
+| Iconos         | lucide-react                                        |
+| Notificaciones | sonner                                              |
+| Gráficos       | recharts                                            |
+| Tests          | Vitest + Testing Library + jsdom                    |
+| Calidad        | ESLint, Prettier, TypeScript estricto               |
 
 Requisitos de entorno y comandos: ver [README](../README.md). Los estilos están en [estilos.md](estilos.md).
 
 ## Estado actual
 
-Landing de una sola página (`/`) con las secciones Inicio, Funcionalidades y Contacto. La acción "Acceder" muestra por ahora un aviso ("El acceso a Mantix estará disponible próximamente"). No hay backend conectado; el backend será en Java.
+Landing de una sola página (`/`) con las secciones Inicio, Funcionalidades y Contacto. La acción "Acceder" muestra por ahora un aviso ("El acceso a Mantix estará disponible próximamente"). No hay backend conectado; el backend será en Java (Spring Boot).
 
 ## Estructura
 
@@ -71,4 +71,4 @@ Reglas del proyecto ([AGENTS.md](../AGENTS.md)): el contenido de la landing vive
 
 ## Integración con el backend (pendiente)
 
-El backend será Java. Decisiones abiertas: estructura del repositorio, framework, y si el frontend se mantiene con SSR o pasa a SPA. Las llamadas a la API se harán con `fetch` y TanStack Query; en desarrollo se usará un proxy de Vite para evitar CORS.
+El backend será Java con Spring Boot, en un repositorio aparte (`mantix-backend`). La especificación de la API estará en `backend.md`. Decisión abierta: si el frontend se mantiene con SSR o pasa a SPA (se cierra al empezar el Paso 4 del [plan de trabajo](plan-de-trabajo.md)). Las llamadas a la API se harán con `fetch` y TanStack Query; en desarrollo se usará un proxy de Vite para evitar CORS.
