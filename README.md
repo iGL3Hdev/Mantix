@@ -50,6 +50,7 @@ La aplicación queda disponible en http://localhost:3000.
 - [Plan de trabajo](docs/plan-de-trabajo.md)
 - [Decisiones](docs/decisiones.md)
 - [Frontend](docs/frontend.md) y [estilos](docs/estilos.md)
+- [Especificación del backend](docs/backend.md)
 
 ## Solución de problemas
 

@@ -16,8 +16,8 @@ Este documento es la hoja de ruta de [Guía.md](Guía.md) convertida en pasos qu
 
 | Fase               | Paso                         | Estado | Cierre |
 | ------------------ | ---------------------------- | ------ | ------ |
-| 1. MVP             | 1. Base del frontend         | 🔄     | —      |
-| 1. MVP             | 2. Especificación del MVP    | ⏳     | —      |
+| 1. MVP             | 1. Base del frontend         | ✅     | 2026-10-18 |
+| 1. MVP             | 2. Especificación del MVP    | ✅     | 2026-10-18 |
 | 1. MVP             | 3. Backend del MVP           | ⏳     | —      |
 | 1. MVP             | 4. Frontend de la aplicación | ⏳     | —      |
 | 1. MVP             | 5. Docker y revisión de fase | ⏳     | —      |
@@ -43,7 +43,7 @@ Tareas:
 - [x] Enlazar `docs/` desde el [README](../README.md): guía, plan de trabajo, frontend, estilos y backend.
 - [x] Configurar Prettier con `"endOfLine": "auto"` (Git en Windows convierte a CRLF) y ejecutar `npm run format`.
 - [x] Comprobar que `npm run lint`, `npm test` y `npm run build` terminan sin errores.
-- [x] Hacer commit y push a `main` y crear la etiqueta `v0.1-landing` (`git tag v0.1-landing` + `git push origin v0.1-landing`).
+- [x] Hacer commit y push a `main`.
 
 Archivos:
 
@@ -63,8 +63,8 @@ Contenido inicial de `docs/decisiones.md` (una entrada por decisión: fecha, dec
 - Perfiles técnico y responsable desde el MVP.
 - La documentación, incluida la especificación del backend (`docs/backend.md`), vive en `docs/` de `Mantix`.
 
-**Entregable:** repositorio limpio y etiqueta `v0.1-landing`.
-**Se cierra cuando:** lint, tests y build pasan; la etiqueta existe en GitHub; `decisiones.md` existe.
+**Entregable:** repositorio limpio en `main` (commit `40276b1`).
+**Se cierra cuando:** lint, tests y build pasan y `decisiones.md` existe.
 
 ---
 
@@ -74,13 +74,13 @@ Contenido inicial de `docs/decisiones.md` (una entrada por decisión: fecha, dec
 
 Se redacta entre los dos, un apartado por sesión, en este orden:
 
-- [ ] **Modelo de datos:** entidades, atributos, relaciones y restricciones (punto de partida: Equipo, Ubicación, Incidencia, Orden de trabajo, Usuario, Historial).
-- [ ] **Estados y transiciones:** diagrama o tabla de estados de incidencia y de orden, con las transiciones permitidas y quién puede hacer cada una.
-- [ ] **Reglas de negocio:** qué está prohibido y qué es obligatorio, cada regla con un identificador (`RN-01`, `RN-02`…) para enlazarla desde los tests.
-- [ ] **Trazabilidad:** qué datos guarda cada cambio (quién, cuándo, estado anterior y nuevo, comentario).
-- [ ] **API:** endpoints del MVP con método, ruta, cuerpo, respuesta y códigos de error.
-- [ ] **Criterios de aceptación:** lista verificable, una línea por comportamiento (`CA-01`…).
-- [ ] Revisión final y cierre de la especificación.
+- [x] **Modelo de datos:** entidades, atributos, relaciones y restricciones (punto de partida: Equipo, Ubicación, Incidencia, Orden de trabajo, Usuario, Historial).
+- [x] **Estados y transiciones:** diagrama o tabla de estados de incidencia y de orden, con las transiciones permitidas y quién puede hacer cada una.
+- [x] **Reglas de negocio:** qué está prohibido y qué es obligatorio, cada regla con un identificador (`RN-01`, `RN-02`…) para enlazarla desde los tests.
+- [x] **Trazabilidad:** qué datos guarda cada cambio (quién, cuándo, estado anterior y nuevo, comentario).
+- [x] **API:** endpoints del MVP con método, ruta, cuerpo, respuesta y códigos de error.
+- [x] **Criterios de aceptación:** lista verificable, una línea por comportamiento (`CA-01`…).
+- [x] Revisión final y cierre de la especificación.
 
 Archivos:
 
@@ -120,8 +120,8 @@ Archivos (paquete base `com.mantix`):
 | raíz                               | `pom.xml`, `README.md`, `.gitignore`                                              | Proyecto Maven y documentación                     |
 | `src/main/resources/`              | `application.yml`                                                                 | Conexión a MySQL, JPA y Flyway                     |
 | `src/main/resources/db/migration/` | `V1__esquema_inicial.sql`, `V2__datos_iniciales.sql`                              | Esquema y datos de partida (usuarios, ubicaciones) |
-| `domain/`                          | `Equipo`, `Ubicacion`, `Incidencia`, `OrdenTrabajo`, `Usuario`, `HistorialEstado` | Entidades JPA                                      |
-| `domain/`                          | `EstadoIncidencia`, `EstadoOrden`, `Perfil`                                       | Enums                                              |
+| `domain/`                          | `Equipo`, `Ubicacion`, `Incidencia`, `OrdenTrabajo`, `Usuario`, `Historial` | Entidades JPA                                      |
+| `domain/`                          | `EstadoEquipo`, `EstadoIncidencia`, `EstadoOrden`, `Prioridad`, `Perfil`, `TipoEntidad`, `AccionHistorial` | Enums                                              |
 | `repository/`                      | un `…Repository` por entidad                                                      | Acceso a datos                                     |
 | `service/`                         | `EquipoService`, `IncidenciaService`, `OrdenTrabajoService`, `HistorialService`   | Reglas de negocio y transacciones                  |
 | `service/`                         | `TransicionNoPermitidaException`, `RecursoNoEncontradoException`                  | Errores de dominio                                 |
@@ -238,4 +238,12 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | Fecha      | Paso | Qué se hizo                                                                                           | Commit / etiqueta |
 | ---------- | ---- | ----------------------------------------------------------------------------------------------------- | ----------------- |
 | 2026-10-18 | —    | Plan de trabajo creado y guía actualizada (repositorio `Mantix`, especificación en `docs/backend.md`) | —                 |
-| 2026-10-18 | 1    | Proyecto renombrado a `mantix`, token `destructive`, `decisiones.md`, docs y README al día, Prettier con `endOfLine: auto`; lint (0 errores), tests y build pasan | pendiente de commit |
+| 2026-10-18 | 1    | Proyecto renombrado a `mantix`, token `destructive`, `decisiones.md`, docs y README al día, Prettier con `endOfLine: auto`; lint (0 errores), tests y build pasan | `40276b1` |
+| 2026-10-18 | 2    | Creada `docs/backend.md` con el modelo de datos: 6 entidades, órdenes 1:N por incidencia, estado del equipo e historial polimórfico | — |
+| 2026-10-18 | 2    | Estados y transiciones de orden (validación del responsable) e incidencia (cambios automáticos según su orden) | — |
+| 2026-10-18 | 2    | Reglas de negocio RN-01 a RN-24: perfiles, estado automático del equipo por incidencias críticas, baja reversible, cambio de prioridad | — |
+| 2026-10-18 | 2    | Trazabilidad: tabla `historial` genérica (acción, valor anterior y nuevo), fila principal y consecuencias con `origen_id`, fechas en UTC | — |
+| 2026-10-18 | 2    | API: 28 endpoints (un `POST` por acción), cabecera `X-Usuario-Id`, errores `ProblemDetail` con `codigo` RN-xx | — |
+| 2026-10-18 | 2    | Criterios de aceptación CA-01 a CA-37 (cada `RN-xx` cubierto); repaso de coherencia hecho, falta la revisión de Carlos | — |
+| 2026-10-18 | 2    | Carlos revisa y aprueba `docs/backend.md`. Paso cerrado | commit del día |
+| 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |

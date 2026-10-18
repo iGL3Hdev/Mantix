@@ -51,8 +51,8 @@ Tres fases; no se pasa a la siguiente sin cerrar los criterios de la anterior.
 
 Cinco pasos en orden; la especificación es el más importante y va antes de escribir backend.
 
-1. **Cerrar la base del frontend.** Revisar `package.json`, `vite.config` y el lockfile por restos de Lovable. README con arranque. Commit etiquetado como punto de partida.
-   - Entregable: repositorio limpio y etiqueta `v0.1-landing`.
+1. **Cerrar la base del frontend.** Revisar `package.json`, `vite.config` y el lockfile por restos de Lovable. README con arranque. Commit como punto de partida.
+   - Entregable: repositorio limpio.
 2. **Especificación del MVP.** Modelo de datos, estados, reglas, API y criterios de aceptación (ver sección siguiente). Se guarda en `docs/` del repositorio `Mantix`.
    - Entregable: `docs/backend.md` revisada y cerrada.
 3. **Backend del MVP.** Spring Boot + JPA: entidades y migraciones, servicios con reglas de estado, controladores. Tests de transiciones antes que los controladores.
