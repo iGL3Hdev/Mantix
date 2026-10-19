@@ -71,4 +71,4 @@ Reglas del proyecto ([AGENTS.md](../AGENTS.md)): el contenido de la landing vive
 
 ## Integración con el backend (pendiente)
 
-El backend será Java con Spring Boot, en un repositorio aparte (`mantix-backend`). La especificación de la API estará en `backend.md`. Decisión abierta: si el frontend se mantiene con SSR o pasa a SPA (se cierra al empezar el Paso 4 del [plan de trabajo](plan-de-trabajo.md)). Las llamadas a la API se harán con `fetch` y TanStack Query; en desarrollo se usará un proxy de Vite para evitar CORS.
+El backend será Java con Spring Boot, en la carpeta `backend/` del mismo repositorio. La especificación de la API estará en `backend.md`. Decisión abierta: si el frontend se mantiene con SSR o pasa a SPA (se cierra al empezar el Paso 4 del [plan de trabajo](plan-de-trabajo.md)). Las llamadas a la API se harán con `fetch` y TanStack Query; en desarrollo se usará un proxy de Vite para evitar CORS.

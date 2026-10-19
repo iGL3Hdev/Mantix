@@ -18,7 +18,7 @@ Este documento es la hoja de ruta de [Guía.md](Guía.md) convertida en pasos qu
 | ------------------ | ---------------------------- | ------ | ------ |
 | 1. MVP             | 1. Base del frontend         | ✅     | 2026-10-18 |
 | 1. MVP             | 2. Especificación del MVP    | ✅     | 2026-10-18 |
-| 1. MVP             | 3. Backend del MVP           | ⏳     | —      |
+| 1. MVP             | 3. Backend del MVP           | 🔄     | —      |
 | 1. MVP             | 4. Frontend de la aplicación | ⏳     | —      |
 | 1. MVP             | 5. Docker y revisión de fase | ⏳     | —      |
 | 2. Solidez técnica | —                            | ⏳     | —      |
@@ -97,15 +97,16 @@ Archivos:
 ### Paso 3. Backend del MVP
 
 **Objetivo:** API del MVP en Spring Boot con las reglas de estado cubiertas por tests.
-**Repositorio:** `mantix-backend` (nuevo).
+**Carpeta:** `backend/` dentro del repositorio `Mantix` (un solo repositorio, ver `decisiones.md`, 2026-10-19).
 
 > Los nombres de entidades y endpoints de esta lista son provisionales: se confirman con `docs/backend.md`.
 
 Tareas:
 
-- [ ] Crear el proyecto con Spring Initializr: Java 21, Maven, dependencias Web, Data JPA, Validation, MySQL Driver y Flyway (más Testcontainers o H2 para tests, se decide en el paso).
-- [ ] Crear el repositorio `mantix-backend` en GitHub. README con arranque y enlace a `docs/backend.md` de `Mantix`.
-- [ ] Configuración y primera migración con el esquema.
+- [x] Crear el proyecto con Spring Initializr en `backend/`: Java 21, Maven, dependencias Web, Data JPA, Validation, MySQL Driver, Flyway y Testcontainers (tests con MySQL real, sin H2).
+- [ ] README de `backend/` con arranque y enlace a `docs/backend.md`.
+- [x] Primera migración con el esquema (`V1`) y datos iniciales (`V2`), comprobadas con `EsquemaInicialTest`.
+- [ ] Configuración de la conexión a MySQL (`application.yml`) para ejecutar la aplicación fuera de los tests.
 - [ ] Entidades y enums de estado.
 - [ ] Repositorios.
 - [ ] Servicios con las reglas de transición y el registro en el historial.
@@ -113,13 +114,13 @@ Tareas:
 - [ ] DTOs, controladores y manejo global de errores.
 - [ ] Tests de integración de la API.
 
-Archivos (paquete base `com.mantix`):
+Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` son relativas a esa carpeta):
 
 | Ubicación                          | Archivos                                                                          | Propósito                                          |
 | ---------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
-| raíz                               | `pom.xml`, `README.md`, `.gitignore`                                              | Proyecto Maven y documentación                     |
-| `src/main/resources/`              | `application.yml`                                                                 | Conexión a MySQL, JPA y Flyway                     |
-| `src/main/resources/db/migration/` | `V1__esquema_inicial.sql`, `V2__datos_iniciales.sql`                              | Esquema y datos de partida (usuarios, ubicaciones) |
+| `backend/`                         | `pom.xml`, `README.md`, `.gitignore`                                              | Proyecto Maven y documentación                     |
+| `backend/src/main/resources/`      | `application.yml`                                                                 | Conexión a MySQL, JPA y Flyway                     |
+| `backend/src/main/resources/db/migration/` | `V1__esquema_inicial.sql`, `V2__datos_iniciales.sql`                      | Esquema y datos de partida (usuarios, ubicaciones) |
 | `domain/`                          | `Equipo`, `Ubicacion`, `Incidencia`, `OrdenTrabajo`, `Usuario`, `Historial` | Entidades JPA                                      |
 | `domain/`                          | `EstadoEquipo`, `EstadoIncidencia`, `EstadoOrden`, `Prioridad`, `Perfil`, `TipoEntidad`, `AccionHistorial` | Enums                                              |
 | `repository/`                      | un `…Repository` por entidad                                                      | Acceso a datos                                     |
@@ -139,7 +140,7 @@ Archivos (paquete base `com.mantix`):
 ### Paso 4. Frontend de la aplicación
 
 **Objetivo:** pantallas de equipos, incidencias y órdenes. Primero con datos de prueba y después conectadas a la API.
-**Repositorio:** `Mantix`.
+**Carpeta:** raíz del repositorio `Mantix`.
 
 Puede empezar en paralelo al Paso 3, en cuanto `docs/backend.md` esté cerrada.
 
@@ -186,23 +187,23 @@ Archivos:
 
 Tareas:
 
-- [ ] Decidir dónde va `docker-compose.yml` y anotarlo en `decisiones.md`.
+- [x] Decidir dónde va `docker-compose.yml`: en la raíz del repositorio (decidido con el repositorio único).
 - [ ] `Dockerfile` del backend (build Maven en varias etapas).
 - [ ] `Dockerfile` del frontend.
 - [ ] `docker-compose.yml` con MySQL (volumen y healthcheck), backend y frontend.
 - [ ] `.env.example` con las variables necesarias.
 - [ ] Repasar cada criterio `CA-xx` de `docs/backend.md` y marcarlo.
-- [ ] Etiquetar `v1.0-mvp` en los dos repositorios.
+- [ ] Etiquetar `v1.0-mvp`.
 
 Archivos:
 
 | Acción    | Archivo                              | Propósito                          |
 | --------- | ------------------------------------ | ---------------------------------- |
-| Crear     | `mantix-backend/Dockerfile`          | Imagen del backend                 |
-| Crear     | `Mantix/Dockerfile`, `.dockerignore` | Imagen del frontend                |
+| Crear     | `backend/Dockerfile`                 | Imagen del backend                 |
+| Crear     | `Dockerfile`, `.dockerignore`        | Imagen del frontend                |
 | Crear     | `docker-compose.yml`                 | Orquestación de los tres servicios |
 | Crear     | `.env.example`                       | Variables de entorno de ejemplo    |
-| Modificar | `README.md` de ambos                 | Arranque con Docker                |
+| Modificar | `README.md` y `backend/README.md`    | Arranque con Docker                |
 
 **Entregable:** `docker compose up` funcional y checklist del MVP cumplida.
 **Se cierra cuando:** desde un clon limpio, `docker compose up` deja la aplicación usable y todos los `CA-xx` están marcados.
@@ -246,4 +247,6 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-10-18 | 2    | API: 28 endpoints (un `POST` por acción), cabecera `X-Usuario-Id`, errores `ProblemDetail` con `codigo` RN-xx | — |
 | 2026-10-18 | 2    | Criterios de aceptación CA-01 a CA-37 (cada `RN-xx` cubierto); repaso de coherencia hecho, falta la revisión de Carlos | — |
 | 2026-10-18 | 2    | Carlos revisa y aprueba `docs/backend.md`. Paso cerrado | commit del día |
+| 2026-10-19 | 3    | Decisión: repositorio único, backend en `backend/`. Creado el proyecto Spring Boot con Initializr (Java 21, Maven 3.10) | — |
+| 2026-10-19 | 3    | Paquete `com.mantix`, MySQL 8.4 en Testcontainers, migraciones `V1` (esquema) y `V2` (usuarios y ubicaciones); 4 tests en verde | commit del día |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |

@@ -81,13 +81,13 @@ Los indicadores (tiempos de resolución, equipos con más incidencias) se especi
 
 ## Convenciones del repositorio
 
-Dos repositorios separados, frontend y backend, cada uno con su propio ciclo de versiones.
+Un solo repositorio, `Mantix`, con frontend y backend.
 
-- `Mantix`: la aplicación React actual (frontend).
-- `mantix-backend`: el proyecto Spring Boot.
-- Documentación: toda en `docs/` de `Mantix`, incluida la especificación del backend (`docs/backend.md`), donde vive el contrato de la API. El backend enlaza a ella.
+- Raíz: la aplicación React (frontend).
+- `backend/`: el proyecto Spring Boot.
+- `docs/`: toda la documentación, incluida la especificación del backend (`docs/backend.md`), donde vive el contrato de la API.
 - Seguimiento del avance: [plan-de-trabajo.md](plan-de-trabajo.md).
-- `docker-compose.yml` para levantar frontend, backend y base de datos: su ubicación se decide en el paso 5.
+- `docker-compose.yml` para levantar frontend, backend y base de datos: va en la raíz.
 
 Flujo de trabajo:
 
@@ -111,6 +111,6 @@ Las decisiones previas a la especificación están cerradas; los cambios futuros
 
 - [x] Estilos: Tailwind CSS en toda la aplicación.
 - [x] Base de datos: MySQL.
-- [x] Estructura del repositorio: dos repositorios separados, frontend (`Mantix`) y backend (`mantix-backend`).
+- [x] Estructura del repositorio: un solo repositorio (`Mantix`), con el frontend en la raíz y el backend en `backend/`.
 - [x] Documentación: centralizada en `docs/` de `Mantix`; la especificación del backend es `docs/backend.md`.
 - [x] Usuarios en el MVP: perfiles básicos (técnico y responsable) desde el inicio, para registrar quién hace cada cambio.

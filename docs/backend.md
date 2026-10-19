@@ -2,7 +2,7 @@
 
 Oct 18, 2026 · @Carlos
 
-Contrato del backend (`mantix-backend`) para el MVP. Responde a las seis preguntas de la [guía](Guía.md); el backend no se empieza hasta que estén todas cerradas. Las decisiones que salen de aquí se anotan en [decisiones.md](decisiones.md).
+Contrato del backend (`backend/`) para el MVP. Responde a las seis preguntas de la [guía](Guía.md); el backend no se empieza hasta que estén todas cerradas. Las decisiones que salen de aquí se anotan en [decisiones.md](decisiones.md).
 
 ## 1. Modelo de datos
 
