@@ -106,9 +106,9 @@ Tareas:
 - [x] Crear el proyecto con Spring Initializr en `backend/`: Java 21, Maven, dependencias Web, Data JPA, Validation, MySQL Driver, Flyway y Testcontainers (tests con MySQL real, sin H2).
 - [ ] README de `backend/` con arranque y enlace a `docs/backend.md`.
 - [x] Primera migración con el esquema (`V1`) y datos iniciales (`V2`), comprobadas con `EsquemaInicialTest`.
-- [ ] Configuración de la conexión a MySQL (`application.yml`) para ejecutar la aplicación fuera de los tests.
-- [ ] Entidades y enums de estado.
-- [ ] Repositorios.
+- [ ] Configuración de la conexión a MySQL en `application.properties` para ejecutar la aplicación fuera de los tests (ya hechos: `ddl-auto=validate`, `open-in-view=false` y zona horaria UTC).
+- [ ] Entidades y enums de estado. Hechos: los 7 enums, `Usuario`, `Ubicacion`, `Equipo` e `Incidencia`. Faltan `OrdenTrabajo` e `Historial`.
+- [ ] Repositorios. Hechos: `Usuario`, `Ubicacion`, `Equipo` e `Incidencia`, cada uno con su test. Faltan `OrdenTrabajo` e `Historial`.
 - [ ] Servicios con las reglas de transición y el registro en el historial.
 - [ ] **Tests de servicio de cada transición (permitidas y prohibidas) antes de los controladores.**
 - [ ] DTOs, controladores y manejo global de errores.
@@ -119,7 +119,7 @@ Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` s
 | Ubicación                          | Archivos                                                                          | Propósito                                          |
 | ---------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------- |
 | `backend/`                         | `pom.xml`, `README.md`, `.gitignore`                                              | Proyecto Maven y documentación                     |
-| `backend/src/main/resources/`      | `application.yml`                                                                 | Conexión a MySQL, JPA y Flyway                     |
+| `backend/src/main/resources/`      | `application.properties`                                                               | Conexión a MySQL, JPA y Flyway                     |
 | `backend/src/main/resources/db/migration/` | `V1__esquema_inicial.sql`, `V2__datos_iniciales.sql`                      | Esquema y datos de partida (usuarios, ubicaciones) |
 | `domain/`                          | `Equipo`, `Ubicacion`, `Incidencia`, `OrdenTrabajo`, `Usuario`, `Historial` | Entidades JPA                                      |
 | `domain/`                          | `EstadoEquipo`, `EstadoIncidencia`, `EstadoOrden`, `Prioridad`, `Perfil`, `TipoEntidad`, `AccionHistorial` | Enums                                              |
@@ -249,4 +249,5 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-10-18 | 2    | Carlos revisa y aprueba `docs/backend.md`. Paso cerrado | commit del día |
 | 2026-10-19 | 3    | Decisión: repositorio único, backend en `backend/`. Creado el proyecto Spring Boot con Initializr (Java 21, Maven 3.10) | — |
 | 2026-10-19 | 3    | Paquete `com.mantix`, MySQL 8.4 en Testcontainers, migraciones `V1` (esquema) y `V2` (usuarios y ubicaciones); 4 tests en verde | commit del día |
+| 2026-10-20 | 3    | Enums de dominio, entidades `Usuario`, `Ubicacion`, `Equipo` e `Incidencia` con sus repositorios; `ddl-auto=validate` y UTC; 9 tests en verde | `Backend: entidades Ubicacion y Equipo…` y siguiente |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |
