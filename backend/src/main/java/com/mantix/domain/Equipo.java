@@ -53,10 +53,35 @@ public class Equipo {
     }
 
     public Equipo(String codigo, String nombre, Ubicacion ubicacion, LocalDate fechaAlta) {
+        this(codigo, nombre, null, null, null, ubicacion, fechaAlta);
+    }
+
+    public Equipo(String codigo, String nombre, String fabricante, String modelo, String numeroSerie,
+            Ubicacion ubicacion, LocalDate fechaAlta) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+        this.numeroSerie = numeroSerie;
         this.ubicacion = ubicacion;
         this.fechaAlta = fechaAlta;
+        this.estado = EstadoEquipo.OPERATIVO;
+    }
+
+        public void actualizarDatos(String nombre, String fabricante, String modelo, String numeroSerie,
+            Ubicacion ubicacion) {
+        this.nombre = nombre;
+        this.fabricante = fabricante;
+        this.modelo = modelo;
+        this.numeroSerie = numeroSerie;
+        this.ubicacion = ubicacion;
+    }
+
+    public void darDeBaja() {
+        this.estado = EstadoEquipo.BAJA;
+    }
+
+    public void reactivar() {
         this.estado = EstadoEquipo.OPERATIVO;
     }
 

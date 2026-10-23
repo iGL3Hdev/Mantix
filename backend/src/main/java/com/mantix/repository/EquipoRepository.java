@@ -6,4 +6,6 @@ import com.mantix.domain.Equipo;
 
 public interface EquipoRepository extends JpaRepository<Equipo, Long> {
 
+    boolean existsByCodigo(String codigo);
+
 }

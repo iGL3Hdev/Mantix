@@ -107,10 +107,10 @@ Tareas:
 - [ ] README de `backend/` con arranque y enlace a `docs/backend.md`.
 - [x] Primera migración con el esquema (`V1`) y datos iniciales (`V2`), comprobadas con `EsquemaInicialTest`.
 - [ ] Configuración de la conexión a MySQL en `application.properties` para ejecutar la aplicación fuera de los tests (ya hechos: `ddl-auto=validate`, `open-in-view=false` y zona horaria UTC).
-- [ ] Entidades y enums de estado. Hechos: los 7 enums, `Usuario`, `Ubicacion`, `Equipo` e `Incidencia`. Faltan `OrdenTrabajo` e `Historial`.
-- [ ] Repositorios. Hechos: `Usuario`, `Ubicacion`, `Equipo` e `Incidencia`, cada uno con su test. Faltan `OrdenTrabajo` e `Historial`.
-- [ ] Servicios con las reglas de transición y el registro en el historial.
-- [ ] **Tests de servicio de cada transición (permitidas y prohibidas) antes de los controladores.**
+- [x] Entidades y enums de estado: los 7 enums y las 6 entidades.
+- [x] Repositorios: uno por entidad, cada uno con su test (`HistorialRepository` incluye la consulta del historial de una entidad en orden).
+- [ ] Servicios con las reglas de transición y el registro en el historial. Hechos: `HistorialService`, `AutorizacionService` y `EquipoService` (alta, edición, baja y reactivación). Faltan `IncidenciaService` (incluye RN-10 y RN-11, estado del equipo) y `OrdenTrabajoService`.
+- [ ] **Tests de servicio de cada transición (permitidas y prohibidas) antes de los controladores.** Método de trabajo: primero el test y un esqueleto que falla, después la implementación. Cubiertas hasta ahora: RN-01 (parcial), RN-02, RN-04, RN-05, RN-09, RN-12, RN-13 y RN-14.
 - [ ] DTOs, controladores y manejo global de errores.
 - [ ] Tests de integración de la API.
 
@@ -125,7 +125,9 @@ Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` s
 | `domain/`                          | `EstadoEquipo`, `EstadoIncidencia`, `EstadoOrden`, `Prioridad`, `Perfil`, `TipoEntidad`, `AccionHistorial` | Enums                                              |
 | `repository/`                      | un `…Repository` por entidad                                                      | Acceso a datos                                     |
 | `service/`                         | `EquipoService`, `IncidenciaService`, `OrdenTrabajoService`, `HistorialService`   | Reglas de negocio y transacciones                  |
-| `service/`                         | `TransicionNoPermitidaException`, `RecursoNoEncontradoException`                  | Errores de dominio                                 |
+| `service/`                         | `AutorizacionService`, `RelojConfig` (en `config/`)                               | Usuario que actúa (RN-04, RN-05) y reloj inyectable |
+| `service/`                         | `DatosEquipo`, `CambiosEquipo` (y equivalentes para incidencias y órdenes)        | Datos de entrada de los servicios, independientes de la capa web |
+| `service/`                         | `ErrorDeDominio` (madre) y `ReglaNegocioException` (409), `PermisoDenegadoException` (403), `RecursoNoEncontradoException` (404), `UsuarioNoIdentificadoException` (401) | Errores de dominio con `codigo` |
 | `web/`                             | un `…Controller` por recurso                                                      | Endpoints REST                                     |
 | `web/dto/`                         | `…Request` / `…Response`                                                          | Contrato de entrada y salida                       |
 | `web/`                             | `GlobalExceptionHandler`                                                          | Errores como respuestas JSON coherentes            |
@@ -250,4 +252,7 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-10-19 | 3    | Decisión: repositorio único, backend en `backend/`. Creado el proyecto Spring Boot con Initializr (Java 21, Maven 3.10) | — |
 | 2026-10-19 | 3    | Paquete `com.mantix`, MySQL 8.4 en Testcontainers, migraciones `V1` (esquema) y `V2` (usuarios y ubicaciones); 4 tests en verde | commit del día |
 | 2026-10-20 | 3    | Enums de dominio, entidades `Usuario`, `Ubicacion`, `Equipo` e `Incidencia` con sus repositorios; `ddl-auto=validate` y UTC; 9 tests en verde | `Backend: entidades Ubicacion y Equipo…` y siguiente |
+| 2026-10-22 | 3    | Entidades `OrdenTrabajo` e `Historial` (inmutable) con sus repositorios; 13 tests en verde. Entidades y repositorios cerrados | — |
+| 2026-10-22 | 3    | `HistorialService` (obligatorio dentro de una transacción, RN-02), reloj inyectable, errores de dominio y `AutorizacionService` (RN-04, RN-05); 21 tests en verde | — |
+| 2026-10-23 | 3    | `EquipoService` hecho con tests primero: alta (RN-05, RN-09), edición (RN-14), baja (RN-12) y reactivación (RN-13), con historial; 36 tests en verde | commit del día |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |
