@@ -64,6 +64,20 @@ public class Incidencia {
 		this.estado = EstadoIncidencia.ABIERTA;
 	}
 
+	public void cambiarPrioridad(Prioridad nueva) {
+		this.prioridad = nueva;
+	}
+
+		public void descartar() {
+		this.estado = EstadoIncidencia.DESCARTADA;
+	}
+
+		public void reabrir() {
+		this.estado = EstadoIncidencia.ABIERTA;
+		this.fechaCierre = null;
+	}
+
+
 	public Long getId() {
 		return id;
 	}

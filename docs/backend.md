@@ -221,7 +221,7 @@ Vocabulario:
 | RN-11 | Un equipo `AVERIADO` vuelve automáticamente a `OPERATIVO` cuando ya no le queda ninguna incidencia `CRITICA` sin cerrar: al cerrarla, al descartarla o al bajarle la prioridad. |
 | RN-12 | Solo se puede dar de baja un equipo `OPERATIVO` que no tenga incidencias sin cerrar. El motivo es obligatorio.                                                  |
 | RN-13 | Un equipo de `BAJA` se puede reactivar (`BAJA` → `OPERATIVO`). El motivo es obligatorio.                                                                        |
-| RN-14 | Un equipo de `BAJA` no se edita ni admite incidencias nuevas.                                                                                                   |
+| RN-14 | Un equipo de `BAJA` no se edita ni admite incidencias nuevas, ni se reabren las que tuvo.                                                                        |
 
 ### Incidencias
 

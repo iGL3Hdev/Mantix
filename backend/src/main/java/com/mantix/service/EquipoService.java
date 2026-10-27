@@ -121,7 +121,7 @@ public class EquipoService {
 		if(hayCritica && anterior == EstadoEquipo.OPERATIVO) {
 			equipo.marcarAveriado();
 		} else if (!hayCritica && anterior == EstadoEquipo.AVERIADO) {
-			equipo.marcarAveriado();
+			equipo.marcarOperativo();
 		} else {
 			return;
 		}
