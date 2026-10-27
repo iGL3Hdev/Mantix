@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 
 import com.mantix.domain.AccionHistorial;
 import com.mantix.domain.Equipo;
@@ -18,6 +19,8 @@ import com.mantix.domain.Usuario;
 import com.mantix.repository.EquipoRepository;
 import com.mantix.repository.IncidenciaRepository;
 import com.mantix.repository.UbicacionRepository;
+import com.mantix.domain.Historial;
+import com.mantix.domain.Prioridad;
 
 @Service
 public class EquipoService {
@@ -104,6 +107,26 @@ public class EquipoService {
 		historial.registrar(TipoEntidad.EQUIPO, equipoId, AccionHistorial.CAMBIO_ESTADO, anterior.name(),
 				equipo.getEstado().name(), null, usuario, motivo);
 		return equipo;
+	}
+
+	@Transactional (propagation = Propagation.MANDATORY)
+	public void reevaluarAveria(Equipo equipo, Usuario usuario, Historial origen) {
+		if(equipo.getEstado() == EstadoEquipo.BAJA) {
+			return;
+		}
+		boolean hayCritica = incidencias.existsByEquipoIdAndPrioridadAndEstadoIn(equipo.getId(),
+						Prioridad.CRITICA,  SIN_CERRAR);
+		EstadoEquipo anterior = equipo.getEstado();
+
+		if(hayCritica && anterior == EstadoEquipo.OPERATIVO) {
+			equipo.marcarAveriado();
+		} else if (!hayCritica && anterior == EstadoEquipo.AVERIADO) {
+			equipo.marcarAveriado();
+		} else {
+			return;
+		}
+		historial.registrar(TipoEntidad.EQUIPO, equipo.getId(), AccionHistorial.CAMBIO_ESTADO, anterior.name(), 
+					equipo.getEstado().name(), origen, usuario, null);
 	}
 
 	private Equipo buscar(Long equipoId) {

@@ -85,6 +85,14 @@ public class Equipo {
         this.estado = EstadoEquipo.OPERATIVO;
     }
 
+    public void marcarAveriado() {
+        this.estado = EstadoEquipo.AVERIADO;
+    }
+
+    public void marcarOperativo() {
+        this.estado = EstadoEquipo.OPERATIVO;
+    }
+
     public Long getId() {
         return id;
     }

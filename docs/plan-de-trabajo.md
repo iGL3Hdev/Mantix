@@ -109,7 +109,7 @@ Tareas:
 - [ ] Configuración de la conexión a MySQL en `application.properties` para ejecutar la aplicación fuera de los tests (ya hechos: `ddl-auto=validate`, `open-in-view=false` y zona horaria UTC).
 - [x] Entidades y enums de estado: los 7 enums y las 6 entidades.
 - [x] Repositorios: uno por entidad, cada uno con su test (`HistorialRepository` incluye la consulta del historial de una entidad en orden).
-- [ ] Servicios con las reglas de transición y el registro en el historial. Hechos: `HistorialService`, `AutorizacionService` y `EquipoService` (alta, edición, baja y reactivación). Faltan `IncidenciaService` (incluye RN-10 y RN-11, estado del equipo) y `OrdenTrabajoService`.
+- [ ] Servicios con las reglas de transición y el registro en el historial. Hechos: `HistorialService`, `AutorizacionService` y `EquipoService` (alta, edición, baja y reactivación). `IncidenciaService` en curso: hecha la apertura (RN-04, RN-14, RN-10 con `EquipoService.reevaluarAveria`); faltan cambio de prioridad (RN-15), descarte (RN-16), reapertura (RN-17) y la recuperación del equipo (RN-11). Falta `OrdenTrabajoService`.
 - [ ] **Tests de servicio de cada transición (permitidas y prohibidas) antes de los controladores.** Método de trabajo: primero el test y un esqueleto que falla, después la implementación. Cubiertas hasta ahora: RN-01 (parcial), RN-02, RN-04, RN-05, RN-09, RN-12, RN-13 y RN-14.
 - [ ] DTOs, controladores y manejo global de errores.
 - [ ] Tests de integración de la API.
@@ -255,4 +255,5 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-10-22 | 3    | Entidades `OrdenTrabajo` e `Historial` (inmutable) con sus repositorios; 13 tests en verde. Entidades y repositorios cerrados | — |
 | 2026-10-22 | 3    | `HistorialService` (obligatorio dentro de una transacción, RN-02), reloj inyectable, errores de dominio y `AutorizacionService` (RN-04, RN-05); 21 tests en verde | — |
 | 2026-10-23 | 3    | `EquipoService` hecho con tests primero: alta (RN-05, RN-09), edición (RN-14), baja (RN-12) y reactivación (RN-13), con historial; 36 tests en verde | commit del día |
+| 2026-10-27 | 3    | `IncidenciaService.crear` con tests primero: apertura (CA-10), usuario inactivo (RN-04), equipo de baja (RN-14) y equipo averiado por crítica (RN-10, CA-11, con `origen_id` al alta); `reevaluarAveria` compartido en `EquipoService`; 44 tests en verde | commit del día |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |
