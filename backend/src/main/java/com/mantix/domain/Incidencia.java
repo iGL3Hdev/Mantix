@@ -68,13 +68,17 @@ public class Incidencia {
 		this.prioridad = nueva;
 	}
 
-		public void descartar() {
+	public void descartar() {
 		this.estado = EstadoIncidencia.DESCARTADA;
 	}
 
-		public void reabrir() {
+	public void reabrir() {
 		this.estado = EstadoIncidencia.ABIERTA;
 		this.fechaCierre = null;
+	}
+
+	public void ponerEnCurso() {
+		this.estado = EstadoIncidencia.EN_CURSO;
 	}
 
 
