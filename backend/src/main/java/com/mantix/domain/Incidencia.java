@@ -81,6 +81,15 @@ public class Incidencia {
 		this.estado = EstadoIncidencia.EN_CURSO;
 	}
 
+	public void cerrar(Instant ahora) {
+		this.estado = EstadoIncidencia.CERRADA;
+		this.fechaCierre = ahora;
+	}
+
+	public void volverAAbierta() {
+		this.estado = EstadoIncidencia.ABIERTA;
+	}
+
 
 	public Long getId() {
 		return id;

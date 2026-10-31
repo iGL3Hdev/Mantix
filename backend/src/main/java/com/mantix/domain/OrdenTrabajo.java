@@ -67,6 +67,39 @@ public class OrdenTrabajo {
         this.estado = tecnico == null ? EstadoOrden.PENDIENTE : EstadoOrden.ASIGNADA;
 
         }
+    
+    public void asignar(Usuario tecnico) {
+        this.tecnico = tecnico;
+        this.estado = EstadoOrden.ASIGNADA;
+    }
+
+    public void cambiarTecnico(Usuario tecnico) {
+        this.tecnico = tecnico;
+    }
+
+    public void empezar(Instant ahora) {
+        this.estado = EstadoOrden.EN_CURSO;
+        this.fechaInicio = ahora;
+    }
+
+    public void resolver(String resolucion, Instant ahora) {
+        this.estado = EstadoOrden.RESUELTA;
+        this.resolucion = resolucion;
+        this.fechaFin = ahora;
+    }
+
+    public void validar() {
+        this.estado = EstadoOrden.CERRADA;
+    }
+
+    public void rechazar() {
+        this.estado = EstadoOrden.EN_CURSO;
+        this.fechaFin = null;
+    }
+
+    public void cancelar() {
+        this.estado = EstadoOrden.CANCELADA;
+    }
 
     public Long getId() {
 		return id;
