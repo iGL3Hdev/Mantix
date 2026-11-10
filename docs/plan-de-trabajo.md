@@ -111,7 +111,7 @@ Tareas:
 - [x] Repositorios: uno por entidad, cada uno con su test (`HistorialRepository` incluye la consulta del historial de una entidad en orden).
 - [x] Servicios con las reglas de transición y el registro en el historial: `HistorialService`, `AutorizacionService`, `EquipoService` (alta, edición, baja, reactivación y `reevaluarAveria` para RN-10 y RN-11), `IncidenciaService` (apertura, cambio de prioridad, descarte y reapertura) y `OrdenTrabajoService` (crear, asignar, reasignar, empezar, resolver, validar, rechazar y cancelar). Los motivos y la resolución obligatorios (RN-21, RN-22 y los motivos de baja, reactivación, descarte y reapertura) se validan en los controladores con Bean Validation.
 - [x] **Tests de servicio de cada transición (permitidas y prohibidas) antes de los controladores.** Método de trabajo: primero el test y un esqueleto que falla, después la implementación. 129 tests en verde. Cubiertas todas las reglas de los servicios: RN-01, RN-02, RN-04 a RN-07, RN-09 a RN-20, RN-23 y RN-24. Pendiente para los tests de integración: CA-32 (una acción rechazada no deja cambios, que necesita ejecutarse sin transacción de test).
-- [ ] DTOs, controladores y manejo global de errores.
+- [ ] DTOs, controladores y manejo global de errores. Hecho: `GlobalExceptionHandler` (errores de dominio a 409, 403, 404 y 401; error inesperado a 500 sin detalle; los errores propios de Spring reciben también `codigo`), con `GlobalExceptionHandlerTest`. `UsuarioController` (solo lectura, con filtros `perfil` y `activo`) y `UsuarioResponse`, con `UsuarioControllerTest`. Faltan ubicaciones, equipos, incidencias, órdenes y el historial.
 - [ ] Tests de integración de la API.
 
 Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` son relativas a esa carpeta):
@@ -132,7 +132,7 @@ Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` s
 | `web/dto/`                         | `…Request` / `…Response`                                                          | Contrato de entrada y salida                       |
 | `web/`                             | `GlobalExceptionHandler`                                                          | Errores como respuestas JSON coherentes            |
 | `src/test/java/…/service/`         | `…ServiceTest`                                                                    | Tests de transiciones y reglas (`RN-xx`)           |
-| `src/test/java/…/web/`             | `…ControllerIT`                                                                   | Tests de integración de la API                     |
+| `src/test/java/…/web/`             | `…ControllerTest`                                                                 | Tests de integración de la API (el sufijo `Test` es el que ejecuta `mvnw verify`) |
 
 **Entregable:** API del MVP con tests pasando.
 **Se cierra cuando:** `mvn verify` pasa y cada regla `RN-xx` tiene al menos un test.
@@ -263,4 +263,6 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-10-31 | 3    | `OrdenTrabajoService.validar` y `rechazar` con tests primero: validar cierra la orden y la incidencia (`fechaCierre`, `origen_id` a la validación, CA-24) y recalcula el equipo (RN-11); rechazar devuelve la orden a `EN_CURSO` y el historial conserva las dos resoluciones (CA-23); RN-05, RN-01, RN-23; 118 tests en verde | commit del día |
 | 2026-10-31 | 3    | `OrdenTrabajoService.cancelar` con tests primero: desde `PENDIENTE`, `ASIGNADA` o `EN_CURSO`, la incidencia vuelve a `ABIERTA` con `origen_id` a la cancelación y se puede crear una orden nueva (CA-25); una `RESUELTA` no se cancela (RN-01); órdenes finales inmutables (RN-23, CA-26). **Servicios terminados**; 129 tests en verde | commit del día |
 | 2026-10-31 | 3    | Conexión a MySQL configurable por variables de entorno (`DB_URL`, `DB_USER`, `DB_PASSWORD`). La aplicación arranca fuera de los tests contra MySQL 8.4 en Docker (puerto 3309), valida las migraciones y Hibernate valida el esquema | commit del día |
+| 2026-11-03 | 3    | `GlobalExceptionHandler` con tests primero (`@WebMvcTest` y un controlador de prueba): 409, 403, 404, 401, 500 sin detalle y `codigo` también en los errores que resuelve Spring (ruta inexistente, método no permitido); 136 tests en verde | commit del día |
+| 2026-11-10 | 3    | Primer controlador real: `UsuarioController` (`GET /api/usuarios` con filtros y `GET /api/usuarios/{id}`) y primer DTO (`UsuarioResponse`), con tests primero sobre MySQL real (`@SpringBootTest` + `MockMvc`); parámetros inválidos a 400 con `VALIDACION`; 144 tests en verde | commit del día |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |
