@@ -1,5 +1,7 @@
 package com.mantix.web;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.mantix.service.ErrorDeDominio;
 import com.mantix.service.PermisoDenegadoException;
@@ -66,6 +69,24 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		}
 		return respuesta;
 	}
+
+	// Un cuerpo que incumple las anotaciones de validación (@NotBlank, @Size…): 400 con la lista de campos erróneos.
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
+		List<ErrorDeCampo> errores = ex.getBindingResult().getFieldErrors().stream()
+				.map(e -> new ErrorDeCampo(e.getField(), e.getDefaultMessage())).toList();
+		ProblemDetail problema = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
+				"Hay datos que no son válidos.");
+		problema.setTitle("Datos no válidos");
+		problema.setProperty("codigo", "VALIDACION");
+		problema.setProperty("errores", errores);
+		return handleExceptionInternal(ex, problema, headers, statusCode, request);
+	}
+
+	private record ErrorDeCampo(String campo, String mensaje) {
+	}
+
 
 	private static ProblemDetail problema(HttpStatus estado, String titulo, ErrorDeDominio ex) {
 		ProblemDetail problema = ProblemDetail.forStatusAndDetail(estado, ex.getMessage());
