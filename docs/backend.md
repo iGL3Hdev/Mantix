@@ -448,14 +448,16 @@ El historial de una incidencia incluye las filas de sus órdenes, ordenadas por 
 | GET    | `/api/ordenes`                    | Filtros: `estado`, `tecnicoId`, `incidenciaId` | `Orden[]`          | —                          |
 | GET    | `/api/ordenes/{id}`               | —                                            | `Orden`              | —                          |
 | POST   | `/api/ordenes`                    | `incidenciaId`\*, `descripcion`\*, `tecnicoId` | 201 `Orden`        | RN-04, RN-05, RN-07, RN-19, RN-20 |
-| POST   | `/api/ordenes/{id}/asignar`       | `tecnicoId`\*, `comentario`                  | `Orden`              | RN-04, RN-05, RN-07        |
-| POST   | `/api/ordenes/{id}/reasignar`     | `tecnicoId`\*, `comentario`                  | `Orden`              | RN-05, RN-24               |
-| POST   | `/api/ordenes/{id}/empezar`       | `comentario`                                 | `Orden`              | RN-06                      |
+| POST   | `/api/ordenes/{id}/asignar`       | `tecnicoId`\*                                | `Orden`              | RN-04, RN-05, RN-07        |
+| POST   | `/api/ordenes/{id}/reasignar`     | `tecnicoId`\*                                | `Orden`              | RN-05, RN-24               |
+| POST   | `/api/ordenes/{id}/empezar`       | —                                            | `Orden`              | RN-06                      |
 | POST   | `/api/ordenes/{id}/resolver`      | `resolucion`\*                               | `Orden`              | RN-06, RN-21               |
-| POST   | `/api/ordenes/{id}/validar`       | `comentario`                                 | `Orden`              | RN-05, RN-11, RN-18        |
+| POST   | `/api/ordenes/{id}/validar`       | —                                            | `Orden`              | RN-05, RN-11, RN-18        |
 | POST   | `/api/ordenes/{id}/rechazar`      | `comentario`\*                               | `Orden`              | RN-05, RN-22               |
 | POST   | `/api/ordenes/{id}/cancelar`      | `comentario`\*                               | `Orden`              | RN-05, RN-18, RN-22        |
 | GET    | `/api/ordenes/{id}/historial`     | —                                            | `EntradaHistorial[]` | —                          |
+
+Solo `resolver`, `rechazar` y `cancelar` llevan texto (obligatorio). Asignar, reasignar, empezar y validar no admiten comentario: la fila de historial de esas acciones se escribe sin él.
 
 Además de las reglas indicadas, cada acción comprueba RN-01: que la transición esté permitida desde el estado actual. Si no lo está, responde `409` con `codigo: "RN-01"`, o con la regla más concreta que se incumpla (p. ej. `RN-23` al tocar una orden cerrada).
 
