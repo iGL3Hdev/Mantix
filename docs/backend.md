@@ -186,7 +186,7 @@ Un equipo `AVERIADO` no se puede dar de baja: tiene, por definición, una incide
 
 ## 3. Reglas de negocio
 
-Cada regla tiene un identificador para citarla en los tests (`@DisplayName("RN-07 …")`) y en los errores de la API. Una acción que incumple una regla se rechaza entera: no cambia nada, ni siquiera el historial.
+Cada regla tiene un identificador que se cita en los errores de la API (el campo `codigo`) y en los criterios de aceptación del apartado 6. Los tests de las reglas que se rechazan comprueban ese `codigo`; los de las reglas que no devuelven error (p. ej. RN-10 y RN-11, que cambian el estado del equipo solas) comprueban su efecto en el estado y en el historial. Una acción que incumple una regla se rechaza entera: no cambia nada, ni siquiera el historial.
 
 Vocabulario:
 
@@ -537,4 +537,4 @@ Se marcan en el paso 5, al revisar la fase.
 - [ ] **CA-36** · El selector de usuario cambia quién hace las acciones, y la interfaz solo ofrece las acciones que el perfil y el estado permiten. _(Manual)_
 - [ ] **CA-37** · Desde un clon limpio, `docker compose up` deja la aplicación usable. _(Manual)_
 
-Todas las reglas `RN-xx` aparecen en al menos un criterio. Además, cada regla tendrá su propio test de servicio en el paso 3.
+Todas las reglas `RN-xx` aparecen en al menos un criterio. Además, cada regla tiene al menos un test en el paso 3: de servicio las de transiciones y permisos, y de integración de la API las que dependen de la capa web (RN-03, RN-08, RN-21 y RN-22).

@@ -221,5 +221,19 @@ public class IncidenciaControllerCrearTest {
 		assertThat(incidencias.count()).isZero();
 	}
 
+	@Test
+	void unaDescripcionDeMasDeCincoMilCaracteresDevuelve400() throws Exception {
+		String json = """
+				{"equipoId": %d, "titulo": "Fuga", "descripcion": "%s", "prioridad": "ALTA"}
+				""".formatted(bomba.getId(), "x".repeat(5001));
+
+		mvc.perform(crear(json).header("X-Usuario-Id", tecnico.getId()))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.errores[*].campo", containsInAnyOrder("descripcion")))
+				.andExpect(jsonPath("$.errores[0].mensaje").value("La descripción admite como máximo 5000 caracteres."));
+
+		assertThat(incidencias.count()).isZero();
+	}
+
 }
 

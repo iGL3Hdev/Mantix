@@ -241,4 +241,17 @@ public class IncidenciaControllerPrioridadTest {
 				.andExpect(jsonPath("$.prioridad").value("MEDIA"));
 	}
 
+	@Test
+	void unComentarioDeMasDeQuinientosCaracteresDevuelve400YNoCambiaNada() throws Exception {
+		String json = "{\"prioridad\": \"ALTA\", \"comentario\": \"" + "x".repeat(501) + "\"}";
+
+		mvc.perform(cambiar(fuga.getId(), json).header("X-Usuario-Id", responsable.getId()))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.errores[*].campo", contains("comentario")))
+				.andExpect(jsonPath("$.errores[0].mensaje").value("El comentario admite como máximo 500 caracteres."));
+
+		mvc.perform(get("/api/incidencias/{id}", fuga.getId()))
+				.andExpect(jsonPath("$.prioridad").value("MEDIA"));
+	}
+
 }

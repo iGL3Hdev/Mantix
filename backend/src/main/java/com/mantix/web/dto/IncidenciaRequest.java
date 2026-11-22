@@ -16,6 +16,7 @@ public record IncidenciaRequest (
             String titulo,
 
             @NotBlank(message = "La descripción es obligatoria.")
+            @Size(max = 5000, message = "La descripción admite como máximo 5000 caracteres.")
             String descripcion,
 
             @NotNull(message = "La prioridad es obligatoria.")
