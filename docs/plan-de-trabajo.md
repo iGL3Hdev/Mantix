@@ -36,7 +36,7 @@ Tareas:
 
 - [x] Renombrar el proyecto en `package.json`: `"name": "mantix"`.
 - [x] Ejecutar `npm install` para que `package-lock.json` recoja el nombre nuevo.
-- [x] Definir `--destructive` (y `--destructive-foreground`) en `:root` de [src/styles.css](../src/styles.css).
+- [x] Definir `--destructive` (y `--destructive-foreground`) en `:root` de [frontend/src/styles.css](../frontend/src/styles.css).
 - [x] Quitar el aviso «Pendiente» de [estilos.md](estilos.md) y añadir el token a la paleta.
 - [x] Crear `docs/decisiones.md` con las decisiones cerradas hasta hoy (ver abajo).
 - [x] Actualizar «Integración con el backend» en [frontend.md](frontend.md): la estructura del repositorio y el framework (Spring Boot) ya están decididos; solo queda abierta la elección entre SSR y SPA.
@@ -142,21 +142,21 @@ Archivos (dentro de `backend/`, paquete base `com.mantix`; las rutas de `src/` s
 
 ### Paso 4. Frontend de la aplicación
 
-**Objetivo:** pantallas de equipos, incidencias y órdenes. Primero con datos de prueba y después conectadas a la API.
-**Carpeta:** raíz del repositorio `Mantix`.
+**Objetivo:** pantallas de equipos, incidencias y órdenes, conectadas directamente a la API real (decisión del 2026-11-25: sin datos de prueba previos).
+**Carpeta:** `frontend/` dentro del repositorio `Mantix` (se mueve desde la raíz el 2026-11-25; las rutas `src/...` de esta lista son relativas a `frontend/`).
 
 Puede empezar en paralelo al Paso 3, en cuanto `docs/backend.md` esté cerrada.
 
 Tareas:
 
-- [ ] Decidir si se mantiene SSR o se pasa a SPA y anotarlo en `decisiones.md`.
+- [x] Decidir si se mantiene SSR o se pasa a SPA y anotarlo en `decisiones.md`: SSR en la landing y cliente (`ssr: false`) en `/app/...` (2026-11-25).
 - [ ] Layout de la aplicación con barra lateral y cabecera.
 - [ ] Botón «Acceder» de la landing: que lleve a la aplicación en lugar de mostrar el aviso.
 - [ ] Módulo de equipos: listado con filtros, detalle y alta/edición.
 - [ ] Módulo de incidencias: listado, alta y cambio de estado.
 - [ ] Módulo de órdenes: listado, detalle con historial y cambio de estado.
 - [ ] Selector de usuario/perfil simulado (sin login real hasta la fase 2).
-- [ ] Sustituir los datos de prueba por llamadas a la API, con proxy de Vite.
+- [ ] Llamadas a la API con el proxy de Vite (`/api` hacia `localhost:8080`) y la cabecera `X-Usuario-Id`.
 - [ ] Tests de los componentes con lógica (formularios y cambio de estado).
 
 Archivos:
@@ -164,7 +164,6 @@ Archivos:
 | Acción    | Archivo                                            | Propósito                                  |
 | --------- | -------------------------------------------------- | ------------------------------------------ |
 | Crear     | `src/modules/<modulo>/types.ts`                    | Tipos según `docs/backend.md`              |
-| Crear     | `src/modules/<modulo>/mock-data.ts`                | Datos de prueba tipados                    |
 | Crear     | `src/modules/<modulo>/api.ts`                      | Llamadas a la API del módulo               |
 | Crear     | `src/modules/<modulo>/hooks.ts`                    | Hooks de TanStack Query                    |
 | Crear     | `src/modules/<modulo>/components/`                 | Tabla, formulario y detalle del módulo     |
@@ -203,7 +202,7 @@ Archivos:
 | Acción    | Archivo                              | Propósito                          |
 | --------- | ------------------------------------ | ---------------------------------- |
 | Crear     | `backend/Dockerfile`                 | Imagen del backend                 |
-| Crear     | `Dockerfile`, `.dockerignore`        | Imagen del frontend                |
+| Crear     | `frontend/Dockerfile`, `frontend/.dockerignore` | Imagen del frontend           |
 | Crear     | `docker-compose.yml`                 | Orquestación de los tres servicios |
 | Crear     | `.env.example`                       | Variables de entorno de ejemplo    |
 | Modificar | `README.md` y `backend/README.md`    | Arranque con Docker                |
@@ -291,4 +290,5 @@ Cada una se elige por separado y solo si aporta algo nuevo que aprender.
 | 2026-11-22 | 3    | `GET /api/ordenes/{id}/historial`: mismo molde que el de equipos con `TipoEntidad.ORDEN`; `OrdenControllerHistorialTest` (6 tests, incluido el de que no se cuelen entradas de otra entidad con el mismo id). Con él, los 28 endpoints de la API están hechos; 373 tests en verde | commit del día |
 | 2026-11-22 | 3    | Cierre de la API: límites que faltaban (`descripcion` de la incidencia, `comentario` de la prioridad); `HistorialNoModificableTest` (CA-33, 405 en PUT, DELETE, POST y PATCH sobre los tres historiales); `AtomicidadTest` (CA-32: un fallo simulado en la cuarta petición de hora al crear una orden deja todas las tablas como estaban; las acciones rechazadas no dejan cambios); `CriteriosDeAceptacionTest` (6 cláusulas sin cubrir: CA-02, 05, 10, 14, 18 y 27). Los criterios de `docs/backend.md` se marcan en el Paso 5; 387 tests en verde | commit del día |
 | 2026-11-22 | 3    | **Paso 3 cerrado.** `UsuariosYUbicacionesSoloLecturaTest` (RN-08: POST, PUT, PATCH y DELETE devuelven 405) completa la cobertura: cada regla `RN-xx` tiene al menos un test, de servicio o de integración de la API. README de `backend/` con el arranque. `docs/backend.md` ajustado a cómo se citan las reglas en los tests (por el `codigo` del error o por su efecto, no con `@DisplayName`) y a los comentarios de las órdenes (solo resolver, rechazar y cancelar llevan texto). 28 endpoints y 390 tests en verde | commit del día |
+| 2026-11-25 | 4    | Inicio del Paso 4. Decisiones: SSR en la landing y cliente (`ssr: false`) en `/app`; sin datos de prueba previos, directos a la API real. El frontend se mueve de la raíz a `frontend/` (78 archivos renombrados con `git mv`), con su `.gitignore` y su README; la raíz tiene ahora un README de entrada y un `.gitignore` propios y `AGENTS.md` apunta a `frontend/src/...`. Comprobado desde `frontend/`: tests (1), lint (0 errores), TypeScript y arranque de la landing | commit del día |
 | 2026-10-18 | 1    | Se quita la etiqueta `v0.1-landing` de los criterios de cierre. Paso cerrado | `40276b1` |

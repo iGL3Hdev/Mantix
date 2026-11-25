@@ -1,6 +1,6 @@
 # Estilos del frontend
 
-Sistema de diseño definido en [src/styles.css](../src/styles.css). Tailwind CSS 4 con variables CSS y componentes shadcn/ui (estilo `new-york`, base `slate`, iconos `lucide`).
+Sistema de diseño definido en [frontend/src/styles.css](../frontend/src/styles.css). Tailwind CSS 4 con variables CSS y componentes shadcn/ui (estilo `new-york`, base `slate`, iconos `lucide`).
 
 ## Principios
 
@@ -33,7 +33,7 @@ El modo oscuro redefine todos los tokens sobre una base azul-pizarra (`oklch(0.1
 
 ## Tipografía
 
-Se cargan desde Google Fonts en [src/routes/__root.tsx](../src/routes/__root.tsx).
+Se cargan desde Google Fonts en [frontend/src/routes/__root.tsx](../frontend/src/routes/__root.tsx).
 
 | Familia       | Utilidad       | Pesos         | Uso                       |
 | ------------- | -------------- | ------------- | ------------------------- |
@@ -57,4 +57,4 @@ Se cargan desde Google Fonts en [src/routes/__root.tsx](../src/routes/__root.tsx
 - Foco visible en elementos interactivos: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring`.
 - Cabecera fija: `sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur`.
 - Navegación de escritorio visible desde `md`; menú móvil por debajo.
-- Combinar clases con `cn()` de [src/lib/utils.ts](../src/lib/utils.ts).
+- Combinar clases con `cn()` de [frontend/src/lib/utils.ts](../frontend/src/lib/utils.ts).

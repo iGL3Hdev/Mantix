@@ -1,2 +1,2 @@
-- Landing copy lives in src/data; sections in src/sections; reusable UI in src/components — keeps content separate from presentation.
-- Future feature modules go in src/modules/<name>/ — isolates domain code as the app grows.
+- Landing copy lives in frontend/src/data; sections in frontend/src/sections; reusable UI in frontend/src/components — keeps content separate from presentation.
+- Future feature modules go in frontend/src/modules/<name>/ — isolates domain code as the app grows.

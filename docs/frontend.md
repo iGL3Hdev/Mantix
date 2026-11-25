@@ -15,13 +15,15 @@
 | Tests          | Vitest + Testing Library + jsdom                    |
 | Calidad        | ESLint, Prettier, TypeScript estricto               |
 
-Requisitos de entorno y comandos: ver [README](../README.md). Los estilos están en [estilos.md](estilos.md).
+Requisitos de entorno y comandos: ver el [README del frontend](../frontend/README.md). Los estilos están en [estilos.md](estilos.md).
 
 ## Estado actual
 
 Landing de una sola página (`/`) con las secciones Inicio, Funcionalidades y Contacto. La acción "Acceder" muestra por ahora un aviso ("El acceso a Mantix estará disponible próximamente"). No hay backend conectado; el backend será en Java (Spring Boot).
 
 ## Estructura
+
+El frontend vive en `frontend/` (como el backend en `backend/`). Las rutas de este documento son relativas a esa carpeta.
 
 ```
 src/
