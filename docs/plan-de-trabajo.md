@@ -156,7 +156,7 @@ Tareas:
 - [ ] Módulo de incidencias: listado, alta y cambio de estado.
 - [ ] Módulo de órdenes: listado, detalle con historial y cambio de estado.
 - [ ] Selector de usuario/perfil simulado (sin login real hasta la fase 2).
-- [ ] Llamadas a la API con el proxy de Vite (`/api` hacia `localhost:8080`) y la cabecera `X-Usuario-Id`.
+- [ ] Llamadas a la API: `src/lib/api-client.ts` (hecho, con test) y proxy de `/api` hacia `localhost:8080` con `routeRules` de Nitro en `vite.config.ts` (comprobado a mano: los errores del backend llegan con su estado y su `codigo`).
 - [ ] Tests de los componentes con lógica (formularios y cambio de estado).
 
 Archivos:

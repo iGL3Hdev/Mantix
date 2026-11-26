@@ -73,4 +73,4 @@ Reglas del proyecto ([AGENTS.md](../AGENTS.md)): el contenido de la landing vive
 
 ## Integración con el backend (pendiente)
 
-El backend será Java con Spring Boot, en la carpeta `backend/` del mismo repositorio. La especificación de la API estará en `backend.md`. Decisión abierta: si el frontend se mantiene con SSR o pasa a SPA (se cierra al empezar el Paso 4 del [plan de trabajo](plan-de-trabajo.md)). Las llamadas a la API se harán con `fetch` y TanStack Query; en desarrollo se usará un proxy de Vite para evitar CORS.
+El backend es Java con Spring Boot, en la carpeta `backend/` del mismo repositorio; su API está especificada en [backend.md](backend.md). Decisión del 2026-11-25 ([decisiones.md](decisiones.md)): la landing se mantiene con SSR y las rutas de la aplicación (`/app/...`) se pintan solo en el navegador. Las llamadas se hacen con `fetch` desde `src/lib/api-client.ts` y TanStack Query, y `/api` se reenvía al backend con un proxy de Nitro (`routeRules` en `vite.config.ts`), lo que evita CORS.

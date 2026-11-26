@@ -10,7 +10,8 @@ export default defineConfig({
       // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
       server: { entry: "server" },
     }),
-    nitro(),
+    // Las llamadas a /api se reenvían al backend de Spring, que escucha en el 8080.
+    nitro({ routeRules: { "/api/**": { proxy: "http://localhost:8080/api/**" } } }),
     viteReact(),
     tailwindcss(),
   ],
